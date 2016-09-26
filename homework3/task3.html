@@ -1,0 +1,29 @@
+<html>
+<head>
+  <meta content="text/html" charset="utf-8">
+  <title>AlexNfr (Алексей Геращенко). JS1. Homework 3. Задача 3</title>
+</head>
+
+<body>
+
+<!-- ДЗ 3. Задача 3 -->
+<script>
+
+  var row, col, outstr = '';
+
+  for (row = 1; row <= 8; row++) {
+    for (col = 1; col<=8; col++) {
+      if ((row % 2) != 0) {
+        outstr += ' #';     // если строка нечетная
+      } else {
+        outstr += '# ';     // если строка четная
+      }
+    }
+    outstr += '\n';
+  }
+  console.log(outstr);
+
+</script>
+
+</body>
+</html>
