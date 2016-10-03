@@ -1,0 +1,40 @@
+<html>
+<head>
+  <meta content="text/html" charset="utf-8">
+  <title>AlexNfr (Алексей Геращенко). JS1. Homework 4. Задача 1</title>
+</head>
+
+<body>
+
+<!-- ДЗ 5. Задача 2 -->
+<script>
+
+  /**
+   * Преобразование числа от 0 до 999 в объект, содержащий его десятичные разряды
+   *
+   * @param   number    входное число
+   * @return  Object    содержит десятичные разряды входного числа
+   */
+  function num2obj(number) {
+    var numObj = {'единицы': 0, 'десятки': 0, 'сотни': 0};
+
+    if ((number >=0) && (number <= 999)) {
+      numObj['единицы'] = number % 10;
+      numObj['десятки'] = Math.floor(number / 10) % 10;
+      numObj['сотни']   = Math.floor(number / 100) % 10;
+    } else {
+      numObj = {};
+    }
+
+    return numObj;
+
+  }
+
+  console.log(num2obj(559));
+  console.log(num2obj(-32));
+  console.log(num2obj(861));
+
+</script>
+
+</body>
+</html>

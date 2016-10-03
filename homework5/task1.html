@@ -1,0 +1,46 @@
+<html>
+<head>
+  <meta content="text/html" charset="utf-8">
+  <title>AlexNfr (Алексей Геращенко). JS1. Homework 4. Задача 1</title>
+</head>
+
+<body>
+
+<!-- ДЗ 5. Задача 1 -->
+<script>
+
+  /**
+   * Преобразование RGB-значения цвета в шестнадцатиричное
+   *
+   * @param   r   десятичное значение R-компонента цвета
+   * @param   g   десятичное значение G-компонента цвета
+   * @param   b   десятичное значение B-компонента цвета
+   * @return      шестнадцатиричное значение цвета
+   */
+  function rgb2hex(r, g, b) {
+
+    /**
+     * Проверка числа на принадлежность диапазону 0..255
+     *
+     * @param   decimal десятичное целое число
+     * @return          true, если decimal >= 0 и <= 255
+     */
+    function check256(decimal) {
+      return ((decimal >= 0) && (decimal <= 255));
+    }
+
+    if (check256(r) && check256(g) && check256(b)) {
+      return (r * 65536 + g * 256 + b).toString(16);
+    } else {
+      return false;
+    }
+
+  }
+
+  console.log(rgb2hex(1, 48, 15));
+  console.log(rgb2hex(52, 33, 78));
+
+</script>
+
+</body>
+</html>
