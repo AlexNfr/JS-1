@@ -1,0 +1,42 @@
+<html>
+<head>
+  <meta content="text/html" charset="utf-8">
+  <title>AlexNfr (Алексей Геращенко). JS1. Homework 6. Задача 3</title>
+</head>
+
+<body>
+
+<!-- ДЗ 6. Задача 3 -->
+<script>
+
+  function pick(obj, keys) {
+    var returnObj = {};
+
+    // console.log(keys);
+    keys.forEach(function (item) {
+      if (obj.hasOwnProperty(item)) {
+        returnObj[item] = obj[item];
+      }
+    });
+
+    return returnObj;
+  }
+
+  var user = {
+          name:     'Sergey',
+          age:      30,
+          email:    'sergey@gmail.com',
+          friends:  ['Sveta', 'Artem']
+  };
+
+  console.log('Тестирование pick():');
+
+  console.log( pick(user, ['name']) );
+  console.log( pick(user, ['name', 'second-name']) );
+  console.log( pick(user, ['name', 'friends']) );
+  console.log( pick(user, ['name', 'nokey', 'age']) );
+
+</script>
+
+</body>
+</html>

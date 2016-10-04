@@ -27,9 +27,7 @@
                     }
 
                     newListItem = new ItemList(currArrItem);
-
                     return (prev == null) ? (firstListItem = newListItem) : (prev.rest = newListItem);
-
                   },
                   null
       );
@@ -37,7 +35,7 @@
 
     return firstListItem;
 
-  } //<-- arrayToList -->//
+  } //<-- arrayToList() -->//
 
   /**
    * Построение массива из списка
@@ -58,7 +56,7 @@
     }
     return arr;
 
-  } //<-- listToArray -->//
+  } //<-- listToArray() -->//
 
   /**
    * Создание нового списка из элемента, добавленного в начало входного списка
@@ -76,9 +74,8 @@
     }
 
     newItem = new ItemList(item, list);
-
     return newItem;
-  }
+  } //<-- prepend() -->//
 
   /**
    * Возврат элемента списка с заданным номером
@@ -103,7 +100,7 @@
       }
     }
     return undefined;
-  }
+  } //<-- nth() -->//
 
   /**
    * Вспомогательная функция для тестирования функции nth()
@@ -114,7 +111,8 @@
    */
   function test_nth(number, list) {
     return ('Value element # ' + number + ' in list (' + listToArray(list) + ') = ' + nth(number, list));
-  }
+  } //<-- test_nth() -->//
+
 
   var list123, arr123, list4123, arr4123;
 

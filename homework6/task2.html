@@ -1,0 +1,65 @@
+<html>
+<head>
+  <meta content="text/html" charset="utf-8">
+  <title>AlexNfr (Алексей Геращенко). JS1. Homework 6. Задача 2</title>
+</head>
+
+<body>
+
+<!-- ДЗ 6. Задача 2 -->
+<script>
+
+  /**
+   * Выдача массива из элементов входного массива, но в обратном порядке
+   *
+   * @param   arr     входной массив
+   * @return  {Array}
+   */
+  function reverseArray(arr) {
+    var outArr = [], n, i, j;
+
+    if (arr instanceof Array) {
+      n = Math.round(arr.length / 2);
+      j = arr.length - 1;
+      for (i = 0; i < n; i++) {
+        outArr[i] = arr[j];
+        outArr[j] = arr[i];
+        j--;
+      }
+    }
+
+    return outArr;
+  }
+
+  function reverseArrayInPlace(arr) {
+    var n, i, j, x;
+
+    if (arr instanceof Array) {
+      n = Math.round(arr.length / 2);
+      j = arr.length - 1;
+      for (i = 0; i < n; i++) {
+        x = arr[j];
+        arr[j] = arr[i];
+        arr[i] = x;
+        j--;
+      }
+    }
+
+  }
+
+  var testArray;
+
+  console.log('Тестирование reversArray():');
+  console.log( reverseArray([1, 2, 3, 4]) );
+
+  console.log('Тестирование reversArrayInPlace():');
+  testArray = [1, 2, 3, 4, 5];
+  reverseArrayInPlace(testArray);
+  console.log(testArray);
+  reverseArrayInPlace(testArray);
+  console.log(testArray);
+
+</script>
+
+</body>
+</html>
