@@ -1,0 +1,145 @@
+<html>
+<head>
+  <meta content="text/html" charset="utf-8">
+  <title>AlexNfr (Алексей Геращенко). JS1. Homework 6. Задача 1</title>
+</head>
+
+<body>
+
+<!-- ДЗ 6. Задача 1 -->
+<script>
+
+  /**
+   * Построение списка из массива
+   *
+   * @param   arr     входной массив [n1, n2, ..., nN]
+   * @return  Object  объект списка вида {value: n1, rest: {value: n2, rest: {... {value: nN, rest:null} ...}
+   */
+  function arrayToList(arr) {
+    var firstListItem = {};
+
+    if (arr instanceof Array) {
+      arr.reduce( function (prev, currArrItem) {
+                    
+                    function ItemList(value) {
+                      this.value = value;
+                      this.rest = null;
+                    }
+
+                    newListItem = new ItemList(currArrItem);
+
+                    return (prev == null) ? (firstListItem = newListItem) : (prev.rest = newListItem);
+
+                  },
+                  null
+      );
+    }
+
+    return firstListItem;
+
+  } //<-- arrayToList -->//
+
+  /**
+   * Построение массива из списка
+   *
+   * @param   list    входной список вида {value: n1, rest: {value: n2, rest: {... {value: nN, rest:null} ...}}
+   * @return  Array   массив [n1, n2, ..., nN]
+   */
+  function listToArray(list) {
+    var arr = [], arrIndex, listItem;
+
+    if (list instanceof Object) {
+      arrIndex = 0;
+      listItem = list;
+      while (listItem && listItem.hasOwnProperty('value')) {
+        arr[arrIndex++] = listItem.value;
+        listItem = (listItem.hasOwnProperty('rest')) ? listItem.rest : null;
+      }
+    }
+    return arr;
+
+  } //<-- listToArray -->//
+
+  /**
+   * Создание нового списка из элемента, добавленного в начало входного списка
+   *
+   * @param item        произвольное значение
+   * @param list        входной список вида {value: n1, rest: {value: n2, rest: {... {value: nN, rest:null} ...}}
+   * @return {ItemList} список вида {value: item, rest: list}
+   */
+  function prepend(item, list) {
+    var newItem;
+
+    function ItemList(item, list) {
+      this.value = item;
+      this.rest = list
+    }
+
+    newItem = new ItemList(item, list);
+
+    return newItem;
+  }
+
+  /**
+   * Возврат элемента списка с заданным номером
+   *
+   * @param number  номер требуемого элемента (> 0)
+   * @param list    входной список вида {value: n1, rest: {value: n2, rest: {... {value: nN, rest:null} ...}}
+   */
+  function nth(number, list) {
+  var i = 1;
+
+    if ((number > 0) && (list instanceof Object)) {
+      while (i < number) {                          // пока итератор < требуемого номера
+        if (list && list.hasOwnProperty('rest')) {  // и есть следующий элемент, перебираем список
+          list = list.rest;
+          i++;
+        } else {
+          return undefined;                         // следующего элемента нет
+        }
+      }
+      if (list && list.hasOwnProperty('value')) {   // если заданный элемент есть и имеет значение
+        return list.value;
+      }
+    }
+    return undefined;
+  }
+
+  /**
+   * Вспомогательная функция для тестирования функции nth()
+   *
+   * @param number
+   * @param list
+   * @return {string}
+   */
+  function test_nth(number, list) {
+    return ('Value element # ' + number + ' in list (' + listToArray(list) + ') = ' + nth(number, list));
+  }
+
+  var list123, arr123, list4123, arr4123;
+
+  // тестирование arrayToList()
+  list123 = arrayToList([1, 2, 3]);
+  console.log(list123);
+
+  // тестирование listToArray()
+  arr123 = listToArray(list123);
+  console.log(arr123);
+
+  // тестирование prepend()
+  list4123 = prepend(4, list123);
+  console.log(list4123);
+
+  arr4123 = listToArray(list4123);
+  console.log(arr4123);
+
+  // тестирование nth()
+  console.log( test_nth( 2, list4123) );
+  console.log( test_nth(-5, list4123) );
+  console.log( test_nth( 2, list123)  );
+  console.log( test_nth(10, list123)  );
+
+</script>
+
+</body>
+</html>
