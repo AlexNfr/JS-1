@@ -1,0 +1,28 @@
+body {
+  width: 60%;
+  max-width: 1500px;
+  margin-left: 20%;
+  background: lightblue;
+}
+
+div .chessTable {
+  width: 1000px;
+  height: 800px;
+}
+
+caption {
+
+}
+
+td {
+  width: 10%;
+  height: 10%;
+}
+
+td .white {
+  background-color: white
+}
+
+td .black {
+  background-color: black
+}
