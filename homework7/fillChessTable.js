@@ -10,7 +10,7 @@ function setFigure(fieldId, figureName, figureColor, figureImageFlag) {
     } else {
         image = document.createElement("img");
         figureFile = key4Image[figureName];
-        image.setAttribute("src", "images/" + figureColor + figureFile + ".jpg");
+        image.setAttribute("src", "images/" + figureColor + figureFile + ".png");
         image.setAttribute("alt", figureName);
         figure.appendChild(image);
     }
