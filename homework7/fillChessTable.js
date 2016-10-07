@@ -1,12 +1,18 @@
-function setFigure(fieldId, figureName, figureColor, figureImage) {
+function setFigure(fieldId, figureName, figureColor, figureImageFlag) {
     var field = document.getElementById(fieldId);
+    var key4Image = {"П": "pawn", "Л": "rook", "К": "knight", "С": "bishop", "Ф": "queen", "(К)": "king"};
+    var figure = document.createElement("span");
+    var figureFile;
 
-    figure = document.createElement("span");
-    if (!figureImage) {
+    if (!figureImageFlag) {
         figure.innerText = figureName;
         figure.setAttribute("class", figureColor);
     } else {
-        ;
+        image = document.createElement("img");
+        figureFile = key4Image[figureName];
+        image.setAttribute("src", "images/" + figureColor + figureFile + ".jpg");
+        image.setAttribute("alt", figureName);
+        figure.appendChild(image);
     }
     field.appendChild(figure);
 }
