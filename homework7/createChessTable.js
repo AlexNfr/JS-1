@@ -7,19 +7,19 @@ function createChessRow(rowNum, tag) {
     var chessRowName = document.createElement("th");
     var chessRowName2 = document.createElement("th");
     var chessRowField;
-    var isGames = (tag == "tr");
-    var tag2 = (isGames ? "td" : "th");
+    var isGamingRow = (tag == "tr");
+    var tag2 = (isGamingRow ? "td" : "th");
     var colNames = "ABCDEFGH";
 
     chessRow.appendChild(chessRowName);
-    if (isGames) {
-        chessRowName.innerText = name;
+    if (isGamingRow) {
+        chessRowName.innerText = rowNum;
     }
 
     for (var colNum = 0; colNum < 8; colNum++) {
         chessRowField = document.createElement(tag2);
         colName = colNames.charAt(colNum);
-        if (isGames) {
+        if (isGamingRow) {
             chessRowField.setAttribute("class", fieldColor(rowNum + colNum));
             chessRowField.setAttribute("id", colName + rowNum);
         } else {
@@ -29,8 +29,8 @@ function createChessRow(rowNum, tag) {
     }
 
     chessRow.appendChild(chessRowName2);
-    if (isGames) {
-        chessRowName2.innerText = name;
+    if (isGamingRow) {
+        chessRowName2.innerText = rowNum;
     }
 
     return chessRow;
@@ -59,3 +59,4 @@ function createChessTable(element) {
     element.appendChild(chessTable);
 
 }
+

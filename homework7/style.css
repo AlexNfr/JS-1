@@ -6,23 +6,47 @@ body {
 }
 
 div .chessTable {
-  width: 1000px;
+  width: 1200px;
   height: 800px;
 }
 
-caption {
+table {
+  max-width: 1200px;
+  border-style: solid;
+  border-color: darkblue;
+}
 
+th {
+  width: 80px;
+  color: blue;
+  border-style: none;
+  text-align: center;
 }
 
 td {
-  width: 10%;
-  height: 10%;
+  width: 60px;
+  height: 60px;
+  text-align: center;
 }
 
-td .white {
-  background-color: white
+td.white {
+  background-color: navajowhite;
 }
 
-td .black {
-  background-color: black
+td.black {
+  background-color: darkgray;
+}
+
+span {
+  padding: 5px;
+  border-radius: 2px;
+  background-color: lightskyblue;
+}
+
+span.white {
+  color: white;
+}
+
+span.black {
+  color: black;
 }
