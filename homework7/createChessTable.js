@@ -1,39 +1,76 @@
-function fieldColor(num) {
-    return (!(num % 2) ? "white" : "black");
+var COLOR = {
+    WHITE: "white",
+    BLACK: "black"
+};
+var LINES = {
+    HEAD:  {
+        TAG: "thead"
+    },
+    GAME: {
+        TAG: "tr",
+        NAMES: ["8", "7", "6", "5", "4", "3", "2", "1"]
+    },
+    FOOT:  {
+        TAG: "tfoot"
+    }
+};
+var COLUMN_NAMES = ["A", "B", "C", "D", "E", "F", "G", "H"];
+
+/**
+ * Вспомогательная функция определения цвета ячейки (четная/нечетная)
+ * @param num
+ * @return {string}
+ */
+function getFieldColorByNum(num) {
+    return (!(num % 2) ? COLOR.WHITE : COLOR.BLACK);
 }
 
-function createChessRow(rowNum, tag) {
-    var chessRow = document.createElement(tag);
-    var chessRowName = document.createElement("th");
-    var chessRowName2 = document.createElement("th");
+/**
+ * Формирование строки шахматной доски
+ *
+ * @param   row         элемент объекта LINES
+ * @param   rowNum      индекс формируемой строки (0..7 - сверху-вниз)
+ * @return  {Element}
+ */
+function createChessRow(row, rowNum) {
+    var rowTag = row.TAG;
+    var rowName, colName;
+    var isGamingRow = (!!rowNum);                       // флаг игровой строки (true, если передан индекс строки)
+    var fieldTag = (isGamingRow ? "td" : "th");
+    var chessRow = document.createElement(rowTag);
+    var chessRowNameL = document.createElement("th");
     var chessRowField;
-    var isGamingRow = (tag == "tr");
-    var tag2 = (isGamingRow ? "td" : "th");
-    var colNames = "ABCDEFGH";
+    var chessRowNameR = document.createElement("th");
 
-    chessRow.appendChild(chessRowName);
-    if (isGamingRow) {
-        chessRowName.innerText = rowNum;
-    }
-
-    for (var colNum = 0; colNum < 8; colNum++) {
-        chessRowField = document.createElement(tag2);
-        colName = colNames.charAt(colNum);
+    if (!isGamingRow || ((rowNum >=0) && (rowNum <= 7))) {
+        chessRow.appendChild(chessRowNameL);
         if (isGamingRow) {
-            chessRowField.setAttribute("class", fieldColor(rowNum + colNum));
-            chessRowField.setAttribute("id", colName + rowNum);
-        } else {
-            chessRowField.innerText = colName;
+            rowName = row.NAMES[rowNum];
+            chessRowNameL.innerText = rowName;
         }
-        chessRow.appendChild(chessRowField);
-    }
 
-    chessRow.appendChild(chessRowName2);
-    if (isGamingRow) {
-        chessRowName2.innerText = rowNum;
+        for (var colNum in COLUMN_NAMES) {
+            chessRowField = document.createElement(fieldTag);
+            colName = COLUMN_NAMES[colNum];
+            if (isGamingRow) {
+                chessRowField.setAttribute("class", getFieldColorByNum(Number(rowNum) + Number(colNum)) );
+                chessRowField.setAttribute("id", colName + rowName);
+            } else {
+                chessRowField.innerText = colName;
+            }
+            chessRow.appendChild(chessRowField);
+        }
+
+        chessRow.appendChild(chessRowNameR);
+        if (isGamingRow) {
+            chessRowNameR.innerText = rowName;
+        }
+    } else {
+        chessRow = false;
     }
 
     return chessRow;
+
 }
 
 function createChessTable(element) {
@@ -48,13 +85,13 @@ function createChessTable(element) {
     chessTable.appendChild(chessTableCaption);
     chessTableCaption.innerText = "Шахматная доска";
 
-    chessTable.appendChild(createChessRow("", "thead"));
+    chessTable.appendChild( createChessRow(LINES.HEAD) );
 
-    for (var rowNum = 8; rowNum >= 1; rowNum--) {
-        chessTable.appendChild(createChessRow(rowNum, "tr"));
+    for (var rowNum in LINES.GAME.NAMES) {
+        chessTable.appendChild( createChessRow(LINES.GAME, rowNum) );
     }
 
-    chessTable.appendChild(createChessRow("", "tfoot"));
+    chessTable.appendChild( createChessRow(LINES.FOOT) ) ;
 
     element.appendChild(chessTable);
 
